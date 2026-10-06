@@ -262,7 +262,112 @@ async function submitSharedScore(name: string, score: number): Promise<Leaderboa
   return data.entry;
 }
 
+function AdminPanel() {
+  const [password, setPassword] = useState("");
+  const [status, setStatus] = useState<"idle" | "working" | "success" | "error">("idle");
+  const [message, setMessage] = useState("");
+
+  async function resetLeaderboard(event: FormEvent) {
+    event.preventDefault();
+    if (!password) {
+      setStatus("error");
+      setMessage("Enter the administrator password.");
+      return;
+    }
+
+    if (!window.confirm("Permanently delete every score from the global leaderboard?")) return;
+
+    setStatus("working");
+    setMessage("");
+
+    try {
+      const response = await fetch(LEADERBOARD_URL, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${publicAnonKey}`,
+          "X-Admin-Password": password,
+        },
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || "Unable to reset the leaderboard.");
+
+      localStorage.removeItem(STORAGE_KEY);
+      setPassword("");
+      setStatus("success");
+      setMessage(
+        `${data.deleted} ${data.deleted === 1 ? "score was" : "scores were"} permanently deleted.`,
+      );
+    } catch (error) {
+      setStatus("error");
+      setMessage(error instanceof Error ? error.message : "Unable to reset the leaderboard.");
+    }
+  }
+
+  return (
+    <main className="app-shell admin">
+      <header className="topbar">
+        <Brand />
+        <span className="case-label">ADMINISTRATION</span>
+      </header>
+
+      <section className="admin-page">
+        <div className="admin-card">
+          <div className="admin-icon" aria-hidden="true" />
+          <p className="eyebrow">STEELSHIFT CONTROL CENTRE</p>
+          <h1>Reset leaderboard</h1>
+          <p className="admin-intro">
+            Permanently remove every player and score from the shared global leaderboard.
+            This action affects all devices and cannot be undone.
+          </p>
+
+          <form onSubmit={resetLeaderboard} className="admin-form">
+            <label htmlFor="admin-password">Administrator password</label>
+            <input
+              id="admin-password"
+              type="password"
+              value={password}
+              onChange={(event) => {
+                setPassword(event.target.value);
+                if (status !== "working") {
+                  setStatus("idle");
+                  setMessage("");
+                }
+              }}
+              placeholder="Enter secure password"
+              autoComplete="current-password"
+              disabled={status === "working"}
+            />
+            <button
+              type="submit"
+              className="danger-button"
+              disabled={status === "working" || !password}
+            >
+              {status === "working" ? "Resetting…" : "Reset global leaderboard"}
+            </button>
+          </form>
+
+          {message && (
+            <p className={`admin-message ${status}`} role="status">
+              {message}
+            </p>
+          )}
+
+          <a className="back-link" href="/">
+            <ArrowIcon /> Return to the game
+          </a>
+        </div>
+      </section>
+
+      <footer>
+        <span>AUTHORIZED ACCESS ONLY</span>
+        <span>TATA STEEL · STEELSHIFT</span>
+      </footer>
+    </main>
+  );
+}
+
 function App() {
+  const isAdminPage = new URLSearchParams(window.location.search).get("admin") === "1";
   const [screen, setScreen] = useState<Screen>("welcome");
   const [name, setName] = useState("");
   const [questionIndex, setQuestionIndex] = useState(0);
@@ -385,6 +490,8 @@ function App() {
         : scorePercent >= 50
           ? "Promising change maker"
           : "Transformation apprentice";
+
+  if (isAdminPage) return <AdminPanel />;
 
   return (
     <main className={`app-shell ${screen}`}>
