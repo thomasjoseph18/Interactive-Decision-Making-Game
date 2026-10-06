@@ -217,13 +217,15 @@ function CheckIcon() {
 
 function Brand() {
   return (
-    <div className="brand" aria-label="Steelshift">
+    <div className="brand" aria-label="Tata Steelshift">
       <span className="brand-mark">
         <i />
         <i />
         <i />
       </span>
-      <span>STEELSHIFT</span>
+      <span className="brand-name">TATA <b>STEEL</b></span>
+      <span className="brand-divider" />
+      <span className="brand-game">STEELSHIFT</span>
     </div>
   );
 }
