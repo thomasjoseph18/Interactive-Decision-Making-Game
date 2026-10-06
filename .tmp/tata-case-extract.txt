@@ -1,0 +1,484 @@
+--- ./src/imports/9_Tata_steel.pdf ---
+./src/imports/9_Tata_steel.pdf: PDF document, version 1.6 (zip deflate encoded)
+Title:            Driving Digital Transformation At Tata Steel’s Marketing & Sales Department: A Change Initiative
+Author:          ISB
+Creator:         Microsoft® Word for Microsoft 365
+Producer:        Acrobat Distiller 23.0 (Windows) (via http://bfo.com/products/pdf?version=2.23.5-r33279)
+CreationDate:    Mon Sep 18 04:15:16 2023 UTC
+ModDate:         Fri Jun 26 12:20:30 2026 UTC
+Custom Metadata: no
+Metadata Stream: yes
+Tagged:          yes
+UserProperties:  no
+Suspects:        no
+Form:            none
+JavaScript:      no
+Pages:           16
+Encrypted:       yes (print:yes copy:no change:no addNotes:yes algorithm:RC4)
+Page size:       612 x 792 pts (letter)
+Page rot:        0
+File size:       353932 bytes
+Optimized:       no
+PDF version:     1.6
+                                                                                                                                    t
+                                                                                                 Indian School of Business
+
+
+
+
+                                                                                               os
+                                                                                                                                            ISB382
+
+                                                                                                                                     June 21, 2023
+
+
+
+
+                                                                                             rP
+             Devidutta Mohanty I Murali Krishna Mantrala I D.V.R. Seshadri
+
+             DRIVING DIGITAL TRANSFORMATION AT TATA STEEL’S MARKETING & SALES
+
+
+
+
+                                                      yo
+             DEPARTMENT: A CHANGE INITIATIVE
+             INTRODUCTION
+
+             On a scorching summer morning in May 2019, Peeyush Gupta, Vice President (Steel), Marketing &
+             Sales (VP, Steel – M&S), started driving the short distance from his official residence to the imposing
+             Tata Center, Tata Steel’s headquarters, in Kolkata. Gupta had been a veteran at Tata Steel and had
+             seen the company grow over the years, riding on the back of a booming Indian economy and a slew
+                                                    op
+             of recent acquisitions. Gupta and his team had just delivered another successful financial year during
+             2018–19 (FY19).1 That morning, at the Annual Business Planning (ABP) meeting, he was due to address
+             the top 350 officials of Tata Steel’s M&S division and officials of other departments such as
+             Manufacturing.
+
+             In previous years, this had been the usual exercise involving taking stock of the macroeconomic
+                              tC
+
+             conditions in the country and other regions where the company did business. However, on this
+             occasion, Gupta wanted to do something radically different and transform the way Tata Steel
+             conducted its M&S activities.
+
+             Despite not being a “digital native,”2 he was very optimistic about developing deeper digital M&S
+             capabilities in the organization. He wanted the M&S function to imbibe the innovativeness of the
+             customer experience in an e-commerce company and apply the concept to the traditional steel
+        No
+
+
+
+             business. As he walked into the packed auditorium, he rehearsed his opening remarks one final time
+             and opened the session:
+
+
+
+
+             1
+               Tata Steel. (2019). Integrated reports and annual accounts 2018–19. Tata Steel Limited.
+             https://www.tatasteel.com/media/9238/tata-steel-ir-2018-19-220619.pdf
+             2 Dingli, A., & Seychell, D. (2015). Who are the digital natives? In: The new digital natives: Cutting the chord. Springer Berlin
+
+             Heidelberg. https://doi.org/10.1007/978-3-662-46590-5_2
+Do
+
+
+
+
+             Professor Devidutta Mohanty, Murali Krishna Mantrala, and Professor D.V.R. Seshadri prepared this case solely as a basis for
+             class discussion. This case is not intended to serve as an endorsement, a source of primary data, or an illustration of effective
+             or ineffective management. The authors would like to thank Peeyush Gupta and Sarajit Jha from Tata Steel for assisting in
+             the writing of the case. This case was developed under the aegis of the Centre for Learning and Management Practice, ISB.
+
+             Copyright @ 2023 Indian School of Business. The publication may not be digitized, photocopied, or otherwise reproduced,
+             posted, or transmitted, without the permission of the Indian School of Business.
+
+
+
+
+This document is authorized for educator review use only by DEVI SOUMYAJA, Cochin University of Science and Technology until Mar 2027. Copying or posting is an
+                                             infringement of copyright. Permissions@hbsp.harvard.edu or 617.783.7860
+                                                                                                                                         ISB382
+
+
+
+
+                                                                                                                                    t
+                        “It has been a very eventful year for us. Our combined crude steel manufacturing
+
+
+
+
+                                                                                               os
+                        capacity at Jamshedpur and Kalinganagar has touched 13.23 million tonnes3 per
+                        annum [mtpa].1 With the acquisition of Bhushan Steel, with a capacity of 5.6 mtpa,
+                        and the 5 mtpa Kalinganagar Phase-II expansion plan, our target of achieving a
+                        production capacity of 30 mtpa by 2025 seems attainable. We are also on course in
+                        terms of ramping up revenues from value-added products and services.
+
+
+
+
+                                                                                             rP
+                        Embracing the digital trend has immense potential to enable us to maintain our
+                        leadership position across the various business segments that we operate in. As we
+                        look at making the organization future-ready, we need to ask ourselves how we can
+                        leverage digital transformation initiatives [see Exhibit 1] to help enhance customer
+                        experience, thereby enabling our B2B and B2C businesses to reach their full potential
+                        and achieve their objectives.”
+
+
+
+
+                                                      yo
+             With digital transformation being a critical item on the agenda at the ABP, Gupta encouraged all those
+             present to have discussions with Pravesh Narang (Chief, Business Excellence and New Projects, which
+             included digital transformation) and his team on the sidelines of the ABP on what they thought should
+             be the future course of action with their digital initiatives. Gupta had thrown open a challenge to his
+             entire team.
+
+             Should they go deeper or broader in the digital initiatives they had already started? Given the fast
+                                                    op
+             pace of technological evolution in the digital space, should they chase newer opportunities that were
+             on the horizon, such as pricing analytics and digital retail value management (RVM),4 or should they
+             carry forward what had already been initiated? Going forward, what should be the trajectory of digital
+             transformation?
+
+             ABOUT TATA STEEL
+                              tC
+
+             Tata Steel was founded in 1907. By 2019, it had emerged as the ninth-largest5 steel conglomerate in
+             the world. It was a powerhouse in steel manufacturing with major production facilities in Jamshedpur,
+             in the state of Jharkhand; a greenfield facility at Kalinganagar in the state of Odisha; a newly acquired
+             manufacturing facility at Angul, Odisha (Bhushan Steel); and several manufacturing facilities in Europe
+             and Southeast Asia. Its total manufacturing capacity had touched 26.8 mtpa, and the company
+             generated a revenue of INR 1.57 trillion in FY19.6 The company had by then become the world’s second
+             most geographically diversified steel producer, with operations in 26 countries and a commercial
+        No
+
+
+
+             presence in over 50 countries. It was also recognized as the global “Industry Leader” in the “Steel
+Do
+
+
+
+
+             3
+               1 tonne = 1 metric ton = 1.10231 US ton.
+             4
+               An exercise to understand the market potential and extract value from co-products.
+             5
+               Pioneer (Beijing Peking University Pioneer Technology Co., Ltd.). (2020, July 31). Top steel-producing companies ranking in
+             2019. https://www.vpsatech.com/Top-Steel-Producing-Companies-Ranking-2019.
+             6
+               Tata Steel. (2019). Integrated reports and annual accounts 2018-19. https://www.tatasteel.com/media/9238/tata-steel-
+             ir-2018-19-220619.pdf
+
+                           Driving Digital Transformation at Tata Steel’s Marketing & Sales Department: A Change Initiative | 2
+
+
+
+This document is authorized for educator review use only by DEVI SOUMYAJA, Cochin University of Science and Technology until Mar 2027. Copying or posting is an
+                                             infringement of copyright. Permissions@hbsp.harvard.edu or 617.783.7860
+                                                                                                                                         ISB382
+
+
+
+
+                                                                                                                                    t
+             Category” by the Dow Jones Sustainability Index. The company supplied hot-rolled steel,7 cold-rolled
+
+
+
+
+                                                                                               os
+             steel,8 coated coils,9 tubes, rebars,10 and more.
+
+             THE MARKETING AND SALES ENGINE AT TATA STEEL
+             Gupta, VP, Steel, M&S, oversaw over 350 officials in India. M&S was organized into four business
+             verticals: Automotive & Special Products (Auto); Industrial Products, Projects & Exports (IPPE);
+
+
+
+
+                                                                                             rP
+             Branded Products & Retail (BPR); and Services & Solutions (S&S). These verticals were supported by
+             the Business Excellence & New Projects (BENP) team. Each of the four business verticals was headed
+             by a Chief of Marketing & Sales (COMS) (see Exhibit 2). The company’s products primarily included
+             flat and long steel products spanning several thousand stock keeping units (SKUs)11 catering to a
+             variety of market segments, such as automotive, construction and infrastructure, white goods, and
+             home building. At a high level, the company addressed three market segments: B2B (business-to-
+             business), where the typical customer was a large automotive or construction player; B2ECA (business
+
+
+
+
+                                                      yo
+             to emerging corporate accounts), where the customer was typically what the company called an
+             emerging corporate account, which was more commonly referred to as a small and medium
+             enterprise, or SME; and B2C (business-to-consumer), where the customer was typically an individual
+             home builder in either urban or rural markets. The split of revenues from these segments was
+             60:20:20.12
+
+             Gupta and his team had several achievements to their credit in FY19, such as an annual sales volume
+                                                    op
+             of 12.7 million tonnes, an increase of ~5% over FY18 sales of 12.15 million tonnes. The team had
+             managed to achieve several segment-related highs, including annual automotive sales at 2.12 million
+             tonnes and a growth of 9.2% Year on Year (YoY) against an industry growth of ~6%, taking the market
+             share to 42% in FY19. The annual sales for branded products increased from 3.8 million tonnes in FY18
+             to 3.9 million tonnes in FY19 (see Exhibit 3).
+
+             START OF THE CHANGE MANAGEMENT JOURNEY: A PRECURSOR TO DIGITAL TRANSFORMATION
+                              tC
+
+             In 2015, the Indian manufacturing industry had already started embracing digital technologies such as
+             the Industrial Internet of Things (IIoT), cloud computing, additive manufacturing, 3D printing, big data
+             analytics, and digital supply chain optimization to drive efficiency, reduce costs, and improve
+             competitiveness. GE’s Brilliant Factory initiative was launched in 2015,13 and Siemens had also
+             launched its Cloud for Industry platform in 2015.14 These were not isolated events; clearly, the
+             manufacturing industry had embraced digital technologies with open arms. In the steel industry, Tata
+--- /tmp/attachments/d33cdadc_9_Tata steel.pdf ---
+/tmp/attachments/d33cdadc_9_Tata steel.pdf: PDF document, version 1.6 (zip deflate encoded)
+Title:            Driving Digital Transformation At Tata Steel’s Marketing & Sales Department: A Change Initiative
+Author:          ISB
+Creator:         Microsoft® Word for Microsoft 365
+Producer:        Acrobat Distiller 23.0 (Windows) (via http://bfo.com/products/pdf?version=2.23.5-r33279)
+CreationDate:    Mon Sep 18 04:15:16 2023 UTC
+ModDate:         Fri Jun 26 12:20:30 2026 UTC
+Custom Metadata: no
+Metadata Stream: yes
+Tagged:          yes
+UserProperties:  no
+Suspects:        no
+Form:            none
+JavaScript:      no
+Pages:           16
+Encrypted:       yes (print:yes copy:no change:no addNotes:yes algorithm:RC4)
+Page size:       612 x 792 pts (letter)
+Page rot:        0
+File size:       353932 bytes
+Optimized:       no
+PDF version:     1.6
+                                                                                                                                    t
+                                                                                                 Indian School of Business
+
+
+
+
+                                                                                               os
+                                                                                                                                            ISB382
+
+                                                                                                                                     June 21, 2023
+
+
+
+
+                                                                                             rP
+             Devidutta Mohanty I Murali Krishna Mantrala I D.V.R. Seshadri
+
+             DRIVING DIGITAL TRANSFORMATION AT TATA STEEL’S MARKETING & SALES
+
+
+
+
+                                                      yo
+             DEPARTMENT: A CHANGE INITIATIVE
+             INTRODUCTION
+
+             On a scorching summer morning in May 2019, Peeyush Gupta, Vice President (Steel), Marketing &
+             Sales (VP, Steel – M&S), started driving the short distance from his official residence to the imposing
+             Tata Center, Tata Steel’s headquarters, in Kolkata. Gupta had been a veteran at Tata Steel and had
+             seen the company grow over the years, riding on the back of a booming Indian economy and a slew
+                                                    op
+             of recent acquisitions. Gupta and his team had just delivered another successful financial year during
+             2018–19 (FY19).1 That morning, at the Annual Business Planning (ABP) meeting, he was due to address
+             the top 350 officials of Tata Steel’s M&S division and officials of other departments such as
+             Manufacturing.
+
+             In previous years, this had been the usual exercise involving taking stock of the macroeconomic
+                              tC
+
+             conditions in the country and other regions where the company did business. However, on this
+             occasion, Gupta wanted to do something radically different and transform the way Tata Steel
+             conducted its M&S activities.
+
+             Despite not being a “digital native,”2 he was very optimistic about developing deeper digital M&S
+             capabilities in the organization. He wanted the M&S function to imbibe the innovativeness of the
+             customer experience in an e-commerce company and apply the concept to the traditional steel
+        No
+
+
+
+             business. As he walked into the packed auditorium, he rehearsed his opening remarks one final time
+             and opened the session:
+
+
+
+
+             1
+               Tata Steel. (2019). Integrated reports and annual accounts 2018–19. Tata Steel Limited.
+             https://www.tatasteel.com/media/9238/tata-steel-ir-2018-19-220619.pdf
+             2 Dingli, A., & Seychell, D. (2015). Who are the digital natives? In: The new digital natives: Cutting the chord. Springer Berlin
+
+             Heidelberg. https://doi.org/10.1007/978-3-662-46590-5_2
+Do
+
+
+
+
+             Professor Devidutta Mohanty, Murali Krishna Mantrala, and Professor D.V.R. Seshadri prepared this case solely as a basis for
+             class discussion. This case is not intended to serve as an endorsement, a source of primary data, or an illustration of effective
+             or ineffective management. The authors would like to thank Peeyush Gupta and Sarajit Jha from Tata Steel for assisting in
+             the writing of the case. This case was developed under the aegis of the Centre for Learning and Management Practice, ISB.
+
+             Copyright @ 2023 Indian School of Business. The publication may not be digitized, photocopied, or otherwise reproduced,
+             posted, or transmitted, without the permission of the Indian School of Business.
+
+
+
+
+This document is authorized for educator review use only by DEVI SOUMYAJA, Cochin University of Science and Technology until Mar 2027. Copying or posting is an
+                                             infringement of copyright. Permissions@hbsp.harvard.edu or 617.783.7860
+                                                                                                                                         ISB382
+
+
+
+
+                                                                                                                                    t
+                        “It has been a very eventful year for us. Our combined crude steel manufacturing
+
+
+
+
+                                                                                               os
+                        capacity at Jamshedpur and Kalinganagar has touched 13.23 million tonnes3 per
+                        annum [mtpa].1 With the acquisition of Bhushan Steel, with a capacity of 5.6 mtpa,
+                        and the 5 mtpa Kalinganagar Phase-II expansion plan, our target of achieving a
+                        production capacity of 30 mtpa by 2025 seems attainable. We are also on course in
+                        terms of ramping up revenues from value-added products and services.
+
+
+
+
+                                                                                             rP
+                        Embracing the digital trend has immense potential to enable us to maintain our
+                        leadership position across the various business segments that we operate in. As we
+                        look at making the organization future-ready, we need to ask ourselves how we can
+                        leverage digital transformation initiatives [see Exhibit 1] to help enhance customer
+                        experience, thereby enabling our B2B and B2C businesses to reach their full potential
+                        and achieve their objectives.”
+
+
+
+
+                                                      yo
+             With digital transformation being a critical item on the agenda at the ABP, Gupta encouraged all those
+             present to have discussions with Pravesh Narang (Chief, Business Excellence and New Projects, which
+             included digital transformation) and his team on the sidelines of the ABP on what they thought should
+             be the future course of action with their digital initiatives. Gupta had thrown open a challenge to his
+             entire team.
+
+             Should they go deeper or broader in the digital initiatives they had already started? Given the fast
+                                                    op
+             pace of technological evolution in the digital space, should they chase newer opportunities that were
+             on the horizon, such as pricing analytics and digital retail value management (RVM),4 or should they
+             carry forward what had already been initiated? Going forward, what should be the trajectory of digital
+             transformation?
+
+             ABOUT TATA STEEL
+                              tC
+
+             Tata Steel was founded in 1907. By 2019, it had emerged as the ninth-largest5 steel conglomerate in
+             the world. It was a powerhouse in steel manufacturing with major production facilities in Jamshedpur,
+             in the state of Jharkhand; a greenfield facility at Kalinganagar in the state of Odisha; a newly acquired
+             manufacturing facility at Angul, Odisha (Bhushan Steel); and several manufacturing facilities in Europe
+             and Southeast Asia. Its total manufacturing capacity had touched 26.8 mtpa, and the company
+             generated a revenue of INR 1.57 trillion in FY19.6 The company had by then become the world’s second
+             most geographically diversified steel producer, with operations in 26 countries and a commercial
+        No
+
+
+
+             presence in over 50 countries. It was also recognized as the global “Industry Leader” in the “Steel
+Do
+
+
+
+
+             3
+               1 tonne = 1 metric ton = 1.10231 US ton.
+             4
+               An exercise to understand the market potential and extract value from co-products.
+             5
+               Pioneer (Beijing Peking University Pioneer Technology Co., Ltd.). (2020, July 31). Top steel-producing companies ranking in
+             2019. https://www.vpsatech.com/Top-Steel-Producing-Companies-Ranking-2019.
+             6
+               Tata Steel. (2019). Integrated reports and annual accounts 2018-19. https://www.tatasteel.com/media/9238/tata-steel-
+             ir-2018-19-220619.pdf
+
+                           Driving Digital Transformation at Tata Steel’s Marketing & Sales Department: A Change Initiative | 2
+
+
+
+This document is authorized for educator review use only by DEVI SOUMYAJA, Cochin University of Science and Technology until Mar 2027. Copying or posting is an
+                                             infringement of copyright. Permissions@hbsp.harvard.edu or 617.783.7860
+                                                                                                                                         ISB382
+
+
+
+
+                                                                                                                                    t
+             Category” by the Dow Jones Sustainability Index. The company supplied hot-rolled steel,7 cold-rolled
+
+
+
+
+                                                                                               os
+             steel,8 coated coils,9 tubes, rebars,10 and more.
+
+             THE MARKETING AND SALES ENGINE AT TATA STEEL
+             Gupta, VP, Steel, M&S, oversaw over 350 officials in India. M&S was organized into four business
+             verticals: Automotive & Special Products (Auto); Industrial Products, Projects & Exports (IPPE);
+
+
+
+
+                                                                                             rP
+             Branded Products & Retail (BPR); and Services & Solutions (S&S). These verticals were supported by
+             the Business Excellence & New Projects (BENP) team. Each of the four business verticals was headed
+             by a Chief of Marketing & Sales (COMS) (see Exhibit 2). The company’s products primarily included
+             flat and long steel products spanning several thousand stock keeping units (SKUs)11 catering to a
+             variety of market segments, such as automotive, construction and infrastructure, white goods, and
+             home building. At a high level, the company addressed three market segments: B2B (business-to-
+             business), where the typical customer was a large automotive or construction player; B2ECA (business
+
+
+
+
+                                                      yo
+             to emerging corporate accounts), where the customer was typically what the company called an
+             emerging corporate account, which was more commonly referred to as a small and medium
+             enterprise, or SME; and B2C (business-to-consumer), where the customer was typically an individual
+             home builder in either urban or rural markets. The split of revenues from these segments was
+             60:20:20.12
+
+             Gupta and his team had several achievements to their credit in FY19, such as an annual sales volume
+                                                    op
+             of 12.7 million tonnes, an increase of ~5% over FY18 sales of 12.15 million tonnes. The team had
+             managed to achieve several segment-related highs, including annual automotive sales at 2.12 million
+             tonnes and a growth of 9.2% Year on Year (YoY) against an industry growth of ~6%, taking the market
+             share to 42% in FY19. The annual sales for branded products increased from 3.8 million tonnes in FY18
+             to 3.9 million tonnes in FY19 (see Exhibit 3).
+
+             START OF THE CHANGE MANAGEMENT JOURNEY: A PRECURSOR TO DIGITAL TRANSFORMATION
+                              tC
+
+             In 2015, the Indian manufacturing industry had already started embracing digital technologies such as
+             the Industrial Internet of Things (IIoT), cloud computing, additive manufacturing, 3D printing, big data
+             analytics, and digital supply chain optimization to drive efficiency, reduce costs, and improve
+             competitiveness. GE’s Brilliant Factory initiative was launched in 2015,13 and Siemens had also
+             launched its Cloud for Industry platform in 2015.14 These were not isolated events; clearly, the
+             manufacturing industry had embraced digital technologies with open arms. In the steel industry, Tata
