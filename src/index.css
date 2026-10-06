@@ -756,7 +756,7 @@ footer,
 
 .results-grid {
   display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
+  grid-template-columns: minmax(0, 620px);
   gap: 18px;
 }
 
@@ -905,12 +905,143 @@ blockquote cite {
   min-height: calc(100vh - 162px);
   margin-inline: auto;
   padding: 64px 0 80px;
+  align-content: center;
+}
+
+.admin-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 30px;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.admin-heading .eyebrow {
+  margin-bottom: 12px;
+}
+
+.admin-heading h1 {
+  margin: 0;
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(38px, 5vw, 64px);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.admin-heading p:last-child {
+  margin: 16px 0 0;
+  color: #9bb3c1;
+  font-size: 14px;
+}
+
+.refresh-button {
+  min-width: 140px;
+  min-height: 44px;
+  border: 1px solid #477089;
+  border-radius: 2px;
+  color: #c5d9e4;
+  background: rgba(11, 50, 74, 0.7);
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.refresh-button:hover {
+  border-color: var(--acid);
+  color: var(--acid);
+}
+
+.admin-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(330px, 0.65fr);
+  gap: 18px;
+  width: 100%;
+  align-items: start;
+}
+
+.admin-leaderboard {
+  min-height: 410px;
+  padding: 30px;
+  border: 1px solid #315269;
+  background: linear-gradient(145deg, rgba(15, 56, 81, 0.88), rgba(7, 34, 52, 0.9));
+  box-shadow: 0 28px 90px rgba(0, 8, 16, 0.28);
+}
+
+.admin-section-title {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.admin-section-title span,
+.admin-section-title > strong {
+  color: var(--acid);
+  font-size: 9px;
+  letter-spacing: 0.15em;
+}
+
+.admin-section-title h2 {
+  margin: 5px 0 0;
+  font-family: "Manrope", sans-serif;
+  font-size: 27px;
+  font-weight: 500;
+}
+
+.admin-section-title > strong {
+  padding: 6px 8px;
+  border: 1px solid #42677e;
+  color: #91a9b8;
+  font-weight: 600;
+}
+
+.admin-leaderboard ol {
+  max-height: 520px;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.admin-leaderboard li {
+  display: grid;
+  grid-template-columns: 50px 1fr 100px 50px;
+  align-items: center;
+  min-height: 54px;
+  border-top: 1px solid #315064;
+  font-size: 13px;
+}
+
+.admin-leaderboard li > span {
+  color: #708c9c;
+  font-size: 10px;
+}
+
+.admin-leaderboard time {
+  color: #708c9c;
+  font-size: 10px;
+}
+
+.admin-leaderboard li > b {
+  color: var(--acid);
+  font-family: "Manrope", sans-serif;
+  text-align: right;
+}
+
+.admin-empty {
+  display: grid;
+  min-height: 260px;
+  margin: 0;
+  color: #7894a3;
+  font-size: 13px;
   place-items: center;
 }
 
 .admin-card {
-  width: min(100%, 590px);
-  padding: 48px;
+  width: 100%;
+  padding: 30px;
   border: 1px solid #315269;
   background: linear-gradient(145deg, rgba(15, 56, 81, 0.88), rgba(7, 34, 52, 0.9));
   box-shadow: 0 28px 90px rgba(0, 8, 16, 0.35);
@@ -948,10 +1079,10 @@ blockquote cite {
   margin-bottom: 14px;
 }
 
-.admin-card h1 {
+.admin-card h2 {
   margin: 0;
   font-family: "Manrope", sans-serif;
-  font-size: clamp(38px, 5vw, 58px);
+  font-size: 28px;
   font-weight: 500;
   line-height: 1.05;
   letter-spacing: -0.045em;
@@ -1054,6 +1185,25 @@ blockquote cite {
   stroke: currentColor;
   stroke-width: 1.6;
   transform: rotate(180deg);
+}
+
+.submission-status {
+  margin: 0;
+  padding: 14px 16px;
+  border-left: 2px solid #4d7187;
+  color: #91a9b8;
+  background: rgba(7, 34, 52, 0.5);
+  font-size: 11px;
+}
+
+.submission-status.shared {
+  border-color: var(--acid);
+  color: #a9ddee;
+}
+
+.submission-status.offline {
+  border-color: #c86e6a;
+  color: #efaaa6;
 }
 
 footer {
@@ -1230,6 +1380,31 @@ footer {
   .admin-page {
     min-height: calc(100vh - 132px);
     padding: 36px 0 54px;
+  }
+
+  .admin-heading {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .admin-heading h1 {
+    font-size: 43px;
+  }
+
+  .admin-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-leaderboard {
+    padding: 22px 16px;
+  }
+
+  .admin-leaderboard li {
+    grid-template-columns: 38px 1fr 45px;
+  }
+
+  .admin-leaderboard time {
+    display: none;
   }
 
   .admin-card {

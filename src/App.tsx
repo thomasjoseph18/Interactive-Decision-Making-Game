@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useMemo, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { projectId, publicAnonKey } from "../utils/supabase/info";
 
 type Screen = "welcome" | "game" | "results";
@@ -266,6 +266,25 @@ function AdminPanel() {
   const [password, setPassword] = useState("");
   const [status, setStatus] = useState<"idle" | "working" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
+  const [entries, setEntries] = useState<LeaderboardEntry[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  async function loadLeaderboard() {
+    setIsLoading(true);
+    try {
+      const leaderboard = await fetchSharedLeaderboard();
+      setEntries(leaderboard);
+    } catch {
+      setStatus("error");
+      setMessage("Unable to load the global leaderboard.");
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    loadLeaderboard();
+  }, []);
 
   async function resetLeaderboard(event: FormEvent) {
     event.preventDefault();
@@ -292,6 +311,7 @@ function AdminPanel() {
       if (!response.ok) throw new Error(data.error || "Unable to reset the leaderboard.");
 
       localStorage.removeItem(STORAGE_KEY);
+      setEntries([]);
       setPassword("");
       setStatus("success");
       setMessage(
@@ -311,50 +331,86 @@ function AdminPanel() {
       </header>
 
       <section className="admin-page">
-        <div className="admin-card">
-          <div className="admin-icon" aria-hidden="true" />
-          <p className="eyebrow">STEELSHIFT CONTROL CENTRE</p>
-          <h1>Reset leaderboard</h1>
-          <p className="admin-intro">
-            Permanently remove every player and score from the shared global leaderboard.
-            This action affects all devices and cannot be undone.
-          </p>
+        <div className="admin-heading">
+          <div>
+            <p className="eyebrow">STEELSHIFT CONTROL CENTRE</p>
+            <h1>Leaderboard management</h1>
+            <p>View and manage scores submitted from every player device.</p>
+          </div>
+          <button type="button" className="refresh-button" onClick={loadLeaderboard}>
+            Refresh scores
+          </button>
+        </div>
 
-          <form onSubmit={resetLeaderboard} className="admin-form">
-            <label htmlFor="admin-password">Administrator password</label>
-            <input
-              id="admin-password"
-              type="password"
-              value={password}
-              onChange={(event) => {
-                setPassword(event.target.value);
-                if (status !== "working") {
-                  setStatus("idle");
-                  setMessage("");
-                }
-              }}
-              placeholder="Enter secure password"
-              autoComplete="current-password"
-              disabled={status === "working"}
-            />
-            <button
-              type="submit"
-              className="danger-button"
-              disabled={status === "working" || !password}
-            >
-              {status === "working" ? "Resetting…" : "Reset global leaderboard"}
-            </button>
-          </form>
+        <div className="admin-grid">
+          <div className="admin-leaderboard">
+            <div className="admin-section-title">
+              <div>
+                <span>GLOBAL RANKING</span>
+                <h2>All players</h2>
+              </div>
+              <strong>{entries.length} ENTRIES</strong>
+            </div>
 
-          {message && (
-            <p className={`admin-message ${status}`} role="status">
-              {message}
+            {isLoading ? (
+              <p className="admin-empty">Loading leaderboard…</p>
+            ) : entries.length === 0 ? (
+              <p className="admin-empty">No scores have been submitted yet.</p>
+            ) : (
+              <ol>
+                {entries.map((entry, index) => (
+                  <li key={entry.id}>
+                    <span>{String(index + 1).padStart(2, "0")}</span>
+                    <strong>{entry.name}</strong>
+                    <time>{new Date(entry.date).toLocaleDateString()}</time>
+                    <b>{entry.score * 10}</b>
+                  </li>
+                ))}
+              </ol>
+            )}
+          </div>
+
+          <div className="admin-card">
+            <div className="admin-icon" aria-hidden="true" />
+            <p className="eyebrow">DANGER ZONE</p>
+            <h2>Reset leaderboard</h2>
+            <p className="admin-intro">
+              Permanently remove every player and score. This affects all devices and
+              cannot be undone.
             </p>
-          )}
 
-          <a className="back-link" href="/">
-            <ArrowIcon /> Return to the game
-          </a>
+            <form onSubmit={resetLeaderboard} className="admin-form">
+              <label htmlFor="admin-password">Administrator password</label>
+              <input
+                id="admin-password"
+                type="password"
+                value={password}
+                onChange={(event) => {
+                  setPassword(event.target.value);
+                  if (status !== "working") {
+                    setStatus("idle");
+                    setMessage("");
+                  }
+                }}
+                placeholder="Enter secure password"
+                autoComplete="current-password"
+                disabled={status === "working"}
+              />
+              <button
+                type="submit"
+                className="danger-button"
+                disabled={status === "working" || !password}
+              >
+                {status === "working" ? "Resetting…" : "Reset global leaderboard"}
+              </button>
+            </form>
+
+            {message && (
+              <p className={`admin-message ${status}`} role="status">
+                {message}
+              </p>
+            )}
+          </div>
         </div>
       </section>
 
@@ -375,7 +431,6 @@ function App() {
   const [isLocked, setIsLocked] = useState(false);
   const [score, setScore] = useState(0);
   const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>(readLeaderboard);
-  const [latestEntryId, setLatestEntryId] = useState("");
   const [leaderboardStatus, setLeaderboardStatus] = useState<"loading" | "shared" | "offline">(
     "loading",
   );
@@ -383,13 +438,6 @@ function App() {
 
   const current = questions[questionIndex];
   const scorePercent = score * 10;
-  const sortedLeaderboard = useMemo(
-    () =>
-      [...leaderboard]
-        .sort((a, b) => b.score - a.score || a.date.localeCompare(b.date))
-        .slice(0, 5),
-    [leaderboard],
-  );
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -458,28 +506,18 @@ function App() {
     };
     const next = [...leaderboard, localEntry].sort((a, b) => b.score - a.score).slice(0, 20);
     setLeaderboard(next);
-    setLatestEntryId(localEntry.id);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
     setScreen("results");
 
     try {
-      const savedEntry = await submitSharedScore(name, finalScore);
+      await submitSharedScore(name, finalScore);
       const sharedEntries = await fetchSharedLeaderboard();
       setLeaderboard(sharedEntries);
-      setLatestEntryId(savedEntry.id);
       setLeaderboardStatus("shared");
       localStorage.setItem(STORAGE_KEY, JSON.stringify(sharedEntries));
     } catch {
       setLeaderboardStatus("offline");
     }
-  }
-
-  function restart() {
-    setQuestionIndex(0);
-    setSelected(null);
-    setIsLocked(false);
-    setScore(0);
-    setScreen("welcome");
   }
 
   const resultMessage =
@@ -500,7 +538,7 @@ function App() {
         {screen === "game" && (
           <div className="header-meta">
             <span>{name}</span>
-            <strong>{score * 10} pts</strong>
+            <strong>Decision {questionIndex + 1} of 10</strong>
           </div>
         )}
         {screen === "results" && <span className="case-label">TATA STEEL · M&amp;S</span>}
@@ -591,15 +629,11 @@ function App() {
               <div className="options" role="group" aria-label="Answer choices">
                 {current.options.map((option, index) => {
                   const isSelected = selected === index;
-                  const isCorrect = isLocked && index === current.correct;
-                  const isWrong = isLocked && isSelected && index !== current.correct;
                   return (
                     <button
                       type="button"
-                      className={`option ${isSelected && !isLocked ? "selected" : ""} ${
-                        isCorrect ? "correct" : ""
-                      } ${isWrong ? "wrong" : ""} ${
-                        isLocked && !isCorrect && !isSelected ? "muted" : ""
+                      className={`option ${isSelected ? "selected" : ""} ${
+                        isLocked && !isSelected ? "muted" : ""
                       }`}
                       onClick={() => selectAnswer(index)}
                       disabled={isLocked}
@@ -607,7 +641,7 @@ function App() {
                       key={option}
                     >
                       <span className="option-letter">
-                        {isCorrect ? <CheckIcon /> : letter(index)}
+                        {isSelected && isLocked ? <CheckIcon /> : letter(index)}
                       </span>
                       <span>{option}</span>
                     </button>
@@ -632,15 +666,16 @@ function App() {
               {isLocked && selected !== null && (
                 <div className="feedback" aria-live="polite">
                   <div className="feedback-heading">
-                    <span className={selected === current.correct ? "right" : "not-quite"}>
-                      {selected === current.correct ? "Strong call" : "Not quite"}
-                    </span>
-                    <span>+{selected === current.correct ? 10 : 0} points</span>
+                    <span className="right">Decision locked</span>
+                    <span>{String(questionIndex + 1).padStart(2, "0")} / 10</span>
                   </div>
-                  <p>{current.rationale}</p>
+                  <p>
+                    Your response has been recorded. The final score will be calculated
+                    after all ten leadership decisions.
+                  </p>
                   <div className="takeaway">
-                    <span>LEADERSHIP NOTE</span>
-                    <strong>{current.takeaway}</strong>
+                    <span>CONFIDENTIAL MODE</span>
+                    <strong>Answer guidance is not displayed during the challenge.</strong>
                   </div>
                   <button type="button" className="primary-button next-button" onClick={advance}>
                     {questionIndex === questions.length - 1 ? "View results" : "Next decision"}
@@ -680,34 +715,12 @@ function App() {
                 “Think Big, Start Small, Scale Fast.”
                 <cite>Peeyush Gupta’s digital motto</cite>
               </blockquote>
-              <button type="button" className="primary-button" onClick={restart}>
-                Play again <ArrowIcon />
-              </button>
-            </div>
-
-            <div className="leaderboard-card">
-              <div className="leaderboard-title">
-                <div>
-                  <span className="section-label">GLOBAL RANKING</span>
-                  <h2>Leaderboard</h2>
-                </div>
-                <span>TOP 5</span>
-              </div>
-              <ol>
-                {sortedLeaderboard.map((entry, index) => (
-                  <li className={entry.id === latestEntryId ? "current-player" : ""} key={entry.id}>
-                    <span className="rank">{String(index + 1).padStart(2, "0")}</span>
-                    <strong>{entry.name}</strong>
-                    <span className="leader-score">{entry.score * 10}</span>
-                  </li>
-                ))}
-              </ol>
-              <p className={`storage-note ${leaderboardStatus}`}>
-                {leaderboardStatus === "loading"
-                  ? "Connecting to the shared leaderboard…"
-                  : leaderboardStatus === "shared"
-                    ? "Live scores from players on every device."
-                    : "Offline: your score is saved on this device only."}
+              <p className={`submission-status ${leaderboardStatus}`}>
+                {leaderboardStatus === "shared"
+                  ? "Your score has been submitted to the global leaderboard."
+                  : leaderboardStatus === "offline"
+                    ? "Your score is saved locally and could not be submitted."
+                    : "Submitting your score…"}
               </p>
             </div>
           </div>
