@@ -1,4 +1,5 @@
 import { FormEvent, useEffect, useMemo, useState } from "react";
+import { projectId, publicAnonKey } from "../utils/supabase/info";
 
 type Screen = "welcome" | "game" | "results";
 
@@ -21,6 +22,7 @@ type LeaderboardEntry = {
 };
 
 const STORAGE_KEY = "steelshift-leaderboard";
+const LEADERBOARD_URL = `https://${projectId}.supabase.co/functions/v1/make-server-318651ea/leaderboard`;
 
 const questions: Question[] = [
   {
@@ -235,6 +237,29 @@ function readLeaderboard(): LeaderboardEntry[] {
   }
 }
 
+async function fetchSharedLeaderboard(): Promise<LeaderboardEntry[]> {
+  const response = await fetch(LEADERBOARD_URL, {
+    headers: { Authorization: `Bearer ${publicAnonKey}` },
+  });
+  if (!response.ok) throw new Error("Unable to load the shared leaderboard.");
+  const data = await response.json();
+  return Array.isArray(data.leaderboard) ? data.leaderboard : [];
+}
+
+async function submitSharedScore(name: string, score: number): Promise<LeaderboardEntry> {
+  const response = await fetch(LEADERBOARD_URL, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${publicAnonKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ name, score }),
+  });
+  if (!response.ok) throw new Error("Unable to save the shared score.");
+  const data = await response.json();
+  return data.entry;
+}
+
 function App() {
   const [screen, setScreen] = useState<Screen>("welcome");
   const [name, setName] = useState("");
@@ -243,6 +268,10 @@ function App() {
   const [isLocked, setIsLocked] = useState(false);
   const [score, setScore] = useState(0);
   const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>(readLeaderboard);
+  const [latestEntryId, setLatestEntryId] = useState("");
+  const [leaderboardStatus, setLeaderboardStatus] = useState<"loading" | "shared" | "offline">(
+    "loading",
+  );
   const [validation, setValidation] = useState("");
 
   const current = questions[questionIndex];
@@ -258,6 +287,25 @@ function App() {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [questionIndex, screen]);
+
+  useEffect(() => {
+    let isActive = true;
+
+    fetchSharedLeaderboard()
+      .then((entries) => {
+        if (!isActive) return;
+        setLeaderboard(entries);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+        setLeaderboardStatus("shared");
+      })
+      .catch(() => {
+        if (isActive) setLeaderboardStatus("offline");
+      });
+
+    return () => {
+      isActive = false;
+    };
+  }, []);
 
   function startGame(event: FormEvent) {
     event.preventDefault();
@@ -286,7 +334,7 @@ function App() {
     if (selected === current.correct) setScore((value) => value + 1);
   }
 
-  function advance() {
+  async function advance() {
     if (questionIndex < questions.length - 1) {
       setQuestionIndex((value) => value + 1);
       setSelected(null);
@@ -295,16 +343,28 @@ function App() {
     }
 
     const finalScore = score;
-    const entry: LeaderboardEntry = {
+    const localEntry: LeaderboardEntry = {
       id: `${Date.now()}-${Math.random()}`,
       name,
       score: finalScore,
       date: new Date().toISOString(),
     };
-    const next = [...leaderboard, entry].sort((a, b) => b.score - a.score).slice(0, 20);
+    const next = [...leaderboard, localEntry].sort((a, b) => b.score - a.score).slice(0, 20);
     setLeaderboard(next);
+    setLatestEntryId(localEntry.id);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
     setScreen("results");
+
+    try {
+      const savedEntry = await submitSharedScore(name, finalScore);
+      const sharedEntries = await fetchSharedLeaderboard();
+      setLeaderboard(sharedEntries);
+      setLatestEntryId(savedEntry.id);
+      setLeaderboardStatus("shared");
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(sharedEntries));
+    } catch {
+      setLeaderboardStatus("offline");
+    }
   }
 
   function restart() {
@@ -519,21 +579,27 @@ function App() {
             <div className="leaderboard-card">
               <div className="leaderboard-title">
                 <div>
-                  <span className="section-label">LOCAL RANKING</span>
+                  <span className="section-label">GLOBAL RANKING</span>
                   <h2>Leaderboard</h2>
                 </div>
                 <span>TOP 5</span>
               </div>
               <ol>
                 {sortedLeaderboard.map((entry, index) => (
-                  <li className={entry.id === sortedLeaderboard.find((item) => item.name === name && item.score === score)?.id ? "current-player" : ""} key={entry.id}>
+                  <li className={entry.id === latestEntryId ? "current-player" : ""} key={entry.id}>
                     <span className="rank">{String(index + 1).padStart(2, "0")}</span>
                     <strong>{entry.name}</strong>
                     <span className="leader-score">{entry.score * 10}</span>
                   </li>
                 ))}
               </ol>
-              <p className="storage-note">Scores are saved on this device.</p>
+              <p className={`storage-note ${leaderboardStatus}`}>
+                {leaderboardStatus === "loading"
+                  ? "Connecting to the shared leaderboard…"
+                  : leaderboardStatus === "shared"
+                    ? "Live scores from players on every device."
+                    : "Offline: your score is saved on this device only."}
+              </p>
             </div>
           </div>
         </section>

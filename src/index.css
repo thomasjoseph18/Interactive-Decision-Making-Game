@@ -859,6 +859,14 @@ blockquote cite {
   font-size: 9px;
 }
 
+.storage-note.shared {
+  color: #9aaa65;
+}
+
+.storage-note.offline {
+  color: #c58f88;
+}
+
 footer {
   display: flex;
   justify-content: space-between;
