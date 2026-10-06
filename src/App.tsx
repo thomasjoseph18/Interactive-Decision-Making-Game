@@ -240,6 +240,7 @@ function App() {
   const [name, setName] = useState("");
   const [questionIndex, setQuestionIndex] = useState(0);
   const [selected, setSelected] = useState<number | null>(null);
+  const [isLocked, setIsLocked] = useState(false);
   const [score, setScore] = useState(0);
   const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>(readLeaderboard);
   const [validation, setValidation] = useState("");
@@ -269,20 +270,27 @@ function App() {
     setValidation("");
     setQuestionIndex(0);
     setSelected(null);
+    setIsLocked(false);
     setScore(0);
     setScreen("game");
   }
 
   function selectAnswer(index: number) {
-    if (selected !== null) return;
+    if (isLocked) return;
     setSelected(index);
-    if (index === current.correct) setScore((value) => value + 1);
+  }
+
+  function lockAnswer() {
+    if (selected === null || isLocked) return;
+    setIsLocked(true);
+    if (selected === current.correct) setScore((value) => value + 1);
   }
 
   function advance() {
     if (questionIndex < questions.length - 1) {
       setQuestionIndex((value) => value + 1);
       setSelected(null);
+      setIsLocked(false);
       return;
     }
 
@@ -302,6 +310,7 @@ function App() {
   function restart() {
     setQuestionIndex(0);
     setSelected(null);
+    setIsLocked(false);
     setScore(0);
     setScreen("welcome");
   }
@@ -413,16 +422,19 @@ function App() {
               <div className="options" role="group" aria-label="Answer choices">
                 {current.options.map((option, index) => {
                   const isSelected = selected === index;
-                  const isCorrect = selected !== null && index === current.correct;
-                  const isWrong = isSelected && index !== current.correct;
+                  const isCorrect = isLocked && index === current.correct;
+                  const isWrong = isLocked && isSelected && index !== current.correct;
                   return (
                     <button
                       type="button"
-                      className={`option ${isCorrect ? "correct" : ""} ${isWrong ? "wrong" : ""} ${
-                        selected !== null && !isCorrect && !isSelected ? "muted" : ""
+                      className={`option ${isSelected && !isLocked ? "selected" : ""} ${
+                        isCorrect ? "correct" : ""
+                      } ${isWrong ? "wrong" : ""} ${
+                        isLocked && !isCorrect && !isSelected ? "muted" : ""
                       }`}
                       onClick={() => selectAnswer(index)}
-                      disabled={selected !== null}
+                      disabled={isLocked}
+                      aria-pressed={isSelected}
                       key={option}
                     >
                       <span className="option-letter">
@@ -434,7 +446,21 @@ function App() {
                 })}
               </div>
 
-              {selected !== null && (
+              {!isLocked && (
+                <button
+                  type="button"
+                  className="lock-button"
+                  onClick={lockAnswer}
+                  disabled={selected === null}
+                >
+                  <span className="lock-icon" aria-hidden="true">
+                    <span />
+                  </span>
+                  {selected === null ? "Select an option to continue" : "Lock answer"}
+                </button>
+              )}
+
+              {isLocked && selected !== null && (
                 <div className="feedback" aria-live="polite">
                   <div className="feedback-heading">
                     <span className={selected === current.correct ? "right" : "not-quite"}>
