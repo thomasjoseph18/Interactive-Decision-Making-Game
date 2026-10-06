@@ -1,1 +1,10 @@
-{}
+{
+  "description": "Engage in a 10-question scenario-based quiz that challenges your decision-making skills and tracks your score on a competitive leaderboard.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
